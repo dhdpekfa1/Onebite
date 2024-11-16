@@ -1,0 +1,31 @@
+.container {
+  max-width: 600px;
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: 0 15px;
+
+  background: #fff;
+  box-shadow: rgba(100, 100, 100, 0.2) 0px 0px 29px 0px;
+}
+
+.header {
+  height: 60px;
+  line-height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header a {
+  color: #222;
+  text-decoration: none;
+}
+
+.main {
+  padding-top: 10px;
+}
+
+.footer {
+  padding: 100px 0;
+  color: #808080;
+}
