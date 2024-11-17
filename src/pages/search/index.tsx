@@ -1,17 +1,30 @@
 import React, { ReactNode } from "react";
-import { useRouter } from "next/router";
 import SearchableLayout from "@/components/searchable-layout";
-import books from "@/mock/books.json";
 import BookItem from "@/components/book-item";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { getSearchBooks } from "@/apis/books";
+import { BookData } from "@/types/types";
 
-const Page = () => {
-  const router = useRouter(); // useRouter 훅을 사용 -> router 변수에 Router 객체를 저장
-  const { q } = router.query; // 구조분해 할당으로 꺼내서 사용
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  console.log("context", context);
 
+  const q = context.query.q;
+
+  const books = await getSearchBooks(q as string);
+
+  return {
+    props: { books },
+  };
+};
+
+const Page = ({
+  books,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div>
-      <h1>query: {q} </h1>
-      {books.map((book) => (
+      {books.map((book: BookData) => (
         <BookItem key={book.id} {...book} />
       ))}
     </div>
