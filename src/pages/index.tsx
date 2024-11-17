@@ -1,17 +1,28 @@
-// pages/index.tsx -> searchBar Layout이 필요한 페이지
 import { ReactNode } from "react";
-import styles from "./index.module.css";
 import SearchableLayout from "@/components/searchable-layout";
+import books from "@/mock/books.json";
+import BookItem from "@/components/book-item";
+import styles from "./index.module.css";
 
 const Home = () => {
   return (
-    <>
-      <h1 className={styles.idx}>Index - Home</h1>
-    </>
+    <div className={styles.container}>
+      <section>
+        <h3>지금 추천하는 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+      <section>
+        <h3>등록된 모든 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+    </div>
   );
 };
 
-// PageComponent 에서 getLayout 호출 -> LayoutComponent로 감싸서 전달
 Home.getLayout = (children: ReactNode) => {
   return <SearchableLayout>{children}</SearchableLayout>;
 };
