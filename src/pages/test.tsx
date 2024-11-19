@@ -1,9 +1,9 @@
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import React from "react";
 
 // 1️⃣ 해당 경로로 요청
-// 2️⃣  getServerSideProps함수 동작 -> 컴포넌트보다 먼저 실행되는 함수
-export const getServerSideProps = () => {
+// 2️⃣  getServerSideProps함수 동작 -> build time에 딱 한번만 생성되는 함수
+export const getStaticProps = () => {
   // 서버로부터 불러온 데이터
   const data = "...";
 
@@ -20,7 +20,7 @@ export const getServerSideProps = () => {
 const Page = ({
   data,
 }: // 반환 값의 타입을 추론해주는 내장 기능
-InferGetServerSidePropsType<typeof getServerSideProps>) => {
+InferGetStaticPropsType<typeof getStaticProps>) => {
   console.log(data);
   return <div>Page</div>;
 };

@@ -2,17 +2,18 @@ import { ReactNode } from "react";
 import SearchableLayout from "@/components/searchable-layout";
 import BookItem from "@/components/book-item";
 import styles from "./index.module.css";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import { getAllBooks, getRandomBooks } from "@/apis/books";
 
 // 1️⃣ 해당 경로로 요청
-// 2️⃣  getServerSideProps함수 동작 -> 컴포넌트보다 먼저 실행되는 함수
-export const getServerSideProps = async () => {
+// 2️⃣  getStaticProps 동작 -> Bundle time에 미리 사전 render 되는 함수
+export const getStaticProps = async () => {
   const [allBooks, randomBooks] = await Promise.all([
     getAllBooks(),
     getRandomBooks(),
   ]);
 
+  // 불러온 데이터를 props로서 Component에 전달
   return {
     props: {
       allBooks,
@@ -25,7 +26,7 @@ export const getServerSideProps = async () => {
 const Home = ({
   allBooks,
   randomBooks,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className={styles.container}>
       <section>
