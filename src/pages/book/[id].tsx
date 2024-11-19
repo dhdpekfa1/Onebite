@@ -28,6 +28,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const book = await getOneBook(Number(id));
 
+  // 존재하지 않는 데이터 조회 시 404 Not-found 반환 설정
   if (!book) {
     return {
       notFound: true,

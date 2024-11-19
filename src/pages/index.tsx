@@ -5,8 +5,7 @@ import styles from "./index.module.css";
 import { InferGetStaticPropsType } from "next";
 import { getAllBooks, getRandomBooks } from "@/apis/books";
 
-// 1️⃣ 해당 경로로 요청
-// 2️⃣  getStaticProps 동작 -> Bundle time에 미리 사전 render 되는 함수
+// 1️⃣  기존 ISC 방식과 동일(+revalidate 프로퍼티 제거)
 export const getStaticProps = async () => {
   const [allBooks, randomBooks] = await Promise.all([
     getAllBooks(),
@@ -19,10 +18,12 @@ export const getStaticProps = async () => {
       allBooks,
       randomBooks,
     },
+    // 2️⃣ revalidate 프로퍼티 제거
   };
 };
 
-// 3️⃣ Page Component 실행
+// 3️⃣ Page Component 실행 -> (re-fresh) 사용자의 동작에 의해 변경
+// ->  현재 설정은 `주소~api/revalidate` url로 요청 시 true 반환, 즉 새로고침 시 정보 변경
 const Home = ({
   allBooks,
   randomBooks,
