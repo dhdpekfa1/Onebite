@@ -1,6 +1,7 @@
 import { BookData } from "@/types/types";
 
-const BASE_URL = "http://localhost:12345";
+// const BASE_URL = "http://localhost:12345";
+const BASE_URL = "https://onebite-books-server-rose.vercel.app";
 
 // 모든 도서
 export const getAllBooks = async (): Promise<BookData[]> => {
