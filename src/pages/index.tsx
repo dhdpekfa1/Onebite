@@ -1,15 +1,16 @@
 import { ReactNode } from "react";
+import { InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import SearchableLayout from "@/components/searchable-layout";
 import BookItem from "@/components/book-item";
 import styles from "./index.module.css";
-import { InferGetStaticPropsType } from "next";
-import { getAllBooks, getRandomBooks } from "@/apis/books";
-import Head from "next/head";
+import fetchBooks from "@/lib/fetch-books";
+import fetchRandomBooks from "@/lib/fetch-random-books";
 
 export const getStaticProps = async () => {
   const [allBooks, randomBooks] = await Promise.all([
-    getAllBooks(),
-    getRandomBooks(),
+    fetchBooks(),
+    fetchRandomBooks(),
   ]);
 
   return {

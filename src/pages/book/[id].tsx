@@ -1,9 +1,9 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "./book-detail.module.css";
-import { getOneBook } from "@/apis/books";
+import fetchOneBook from "@/lib/fetch-one-book";
 
 // 1️⃣ 현재 해당 페이지에 존재할 수 있는 경로를 설정
 export const getStaticPaths = () => {
@@ -27,7 +27,7 @@ export const getStaticPaths = () => {
 // 2️⃣ 설정된 경로에 해당하는 페이지들을 일일이 호출 -> 사전에 여러 개의 페이지 렌더링
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
-  const book = await getOneBook(Number(id));
+  const book = await fetchOneBook(Number(id));
 
   // 존재하지 않는 데이터 조회 시 404 Not-found 반환 설정
   if (!book) {

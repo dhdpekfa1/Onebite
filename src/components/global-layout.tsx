@@ -9,7 +9,7 @@ const GlobalLayout = ({ children }: { children: ReactNode }) => {
         <Link href={"/"}>📚 ONEBITE BOOKS</Link>
       </header>
       <main className={styles.main}>{children}</main>
-      <footer className={styles.footer}>제작@Lina</footer>
+      <footer className={styles.footer}>제작@Ollin</footer>
     </div>
   );
 };

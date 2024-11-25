@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import SearchableLayout from "@/components/searchable-layout";
 import BookItem from "@/components/book-item";
-import { getSearchBooks } from "@/apis/books";
+import fetchBooks from "@/lib/fetch-books";
 import { BookData } from "@/types/types";
 
 const Page = () => {
@@ -14,7 +14,7 @@ const Page = () => {
   // 검색 결과 불러오기
   const fetchSearchResult = async () => {
     if (q) {
-      const data = await getSearchBooks(q as string);
+      const data = await fetchBooks(q as string);
       setBooks(data);
     }
   };
