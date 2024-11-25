@@ -19,7 +19,7 @@ const SearchableLayout = ({ children }: { children: ReactNode }) => {
 
   const onSubmit = () => {
     if (!search || q === search) return;
-    router.push(`/search?p${search}`);
+    router.push(`/search?q=${search}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

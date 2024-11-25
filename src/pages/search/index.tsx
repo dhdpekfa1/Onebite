@@ -1,40 +1,40 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 import SearchableLayout from "@/components/searchable-layout";
 import BookItem from "@/components/book-item";
-// import {  GetStaticPathsContext, InferGetStaticPropsType } from "next";
-// import { getSearchBooks } from "@/apis/books";
-import { BookData } from "@/types/types";
-import { useRouter } from "next/router";
 import { getSearchBooks } from "@/apis/books";
-
-// 검색 결과를 서버로부터 불러오는 동작 사용 불가(build time에 알 수 없기 때문)
-// export const getStaticProps = async (context: GetStaticPathsContext) => {
-//   const q = context.query.q;
-
-//   const books = await getSearchBooks(q as string);
-
-//   return {
-//     props: { books },
-//   };
-// };
+import { BookData } from "@/types/types";
 
 const Page = () => {
   const [books, setBooks] = useState<BookData[]>([]);
-  const router = useRouter(); // 기존의 react router (client)방식 사용
-  const q = router.query.q;
+  const router = useRouter();
+  const { q } = router.query;
 
+  // 검색 결과 불러오기
   const fetchSearchResult = async () => {
-    const data = await getSearchBooks(q as string);
-    setBooks(data);
+    if (q) {
+      const data = await getSearchBooks(q as string);
+      setBooks(data);
+    }
   };
 
   useEffect(() => {
-    if (q) {
-      fetchSearchResult();
-    }
+    console.log("검색 쿼리:", q);
+    fetchSearchResult();
   }, [q]);
+
   return (
     <div>
+      <Head>
+        <title>한입 북스 - 검색 결과</title>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="한입북스 - 검색 결과" />
+        <meta
+          property="og:description"
+          content="한입 북스에 등록된 도서들을 만나보세요."
+        />
+      </Head>
       {books.map((book: BookData) => (
         <BookItem key={book.id} {...book} />
       ))}
