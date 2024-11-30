@@ -5,7 +5,9 @@ import { BookData } from "@/types";
 /** component를 각각 AllBooks, RecoBooks로 분리
  *  -> fetching 각각 한 번만 실행*/
 const AllBooks = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
+    cache: "no-store",
+  });
   if (!res.ok) {
     return <div>데이터를 불러오는 중 오류가 발생했습니다..</div>;
   }
@@ -23,6 +25,10 @@ const AllBooks = async () => {
 const RecoBooks = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`
+    // { cache: "force-cache" } // 첫 요청 시 결과를 무조건 캐싱, 이후 호출x
+    //  { cache: "no-store" }   // caching 안함 (defaultValue)
+    //  { next: { revalidate: 3 } } // 3초마다 재검증
+    // { next: { tags: '[a]'} } // 요청이 들어왔을 때 data를 최신화
   );
   if (!res.ok) {
     return <div>데이터를 불러오는 중 오류가 발생했습니다..</div>;
