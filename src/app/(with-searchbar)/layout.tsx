@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Searchbar from "./searchbar";
+import Searchbar from "@/components/searchbar";
 
 const SearchLayout = ({ children }: { children: ReactNode }) => {
   return (
