@@ -2,8 +2,13 @@ import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
 
-/** component를 각각 AllBooks, RecoBooks로 분리
- *  -> fetching 각각 한 번만 실행*/
+/** 특정 페이지의 유형을 강제로 static | dynamic 페이지로 설정
+ *  auto: 아무 것도 강제하지 않음 (기본값)
+ *  force-dynamic:페이지를 강제로 dynamic 페이지로 설정
+ *  force-static:페이지를 강제로 static 페이지로 설정 -> 동적 경로의 값은 빈 값(undefined)으로 설정됨
+ *  error: 페이지를 강제로 static페이지로 설정 (설정하면 안되는 이유가 있을 경우 빌드 오류 발생) */
+// export const dynamic = "";
+
 const AllBooks = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
     cache: "force-cache",

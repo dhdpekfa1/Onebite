@@ -1,7 +1,9 @@
 import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
 
-export default async function Page({
+export const dynamic = "force-static";
+
+export default async function SearchPage({
   searchParams,
 }: {
   searchParams: { q?: string };
