@@ -5,8 +5,6 @@ import { BookData } from "@/types";
 
 const Footer = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
-    // 요청 결과를 무조건 캐싱(한 번 호출된 이후에는 호출되지 않음)
-    // -> RootLayout 컴포넌트에 포함되는 Footer로 인한 DynamicPage 설정 방지
     cache: "force-cache",
   });
   if (!res.ok) {
