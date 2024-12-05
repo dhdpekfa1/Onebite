@@ -1,8 +1,12 @@
+import { Suspense } from "react";
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
+import { delay } from "@/util/delay";
 
 const AllBooks = async () => {
+  await delay(1500);
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, {
     cache: "force-cache",
   });
@@ -21,6 +25,8 @@ const AllBooks = async () => {
 };
 
 const RecoBooks = async () => {
+  await delay(3000);
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
     { next: { revalidate: 3 } } // 3초마다 재검증
@@ -39,16 +45,23 @@ const RecoBooks = async () => {
   );
 };
 
+// Suspense 사용을 위해 강제로 동적 페이지로 변경
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <RecoBooks />
+        <Suspense fallback={<div>추천 도서를 불러오는 중입니다.</div>}>
+          <RecoBooks />
+        </Suspense>
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <AllBooks />
+        <Suspense fallback={<div>모든 도서를 불러오는 중입니다.</div>}>
+          <AllBooks />
+        </Suspense>
       </section>
     </div>
   );
