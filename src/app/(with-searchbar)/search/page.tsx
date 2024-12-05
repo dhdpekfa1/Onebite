@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
 import { delay } from "@/util/delay";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 const SearchResult = async ({ q }: { q: string }) => {
   await delay(1500);
@@ -36,7 +37,7 @@ export default function SearchPage({
      */
     <Suspense
       key={searchParams.q || ""}
-      fallback={<div>데이터들 불러오는 중..</div>}
+      fallback={<BookListSkeleton count={3} />}
     >
       <SearchResult q={searchParams.q || ""} />{" "}
       {/* 비동기 작업을 수행하는 SearchResult  */}
