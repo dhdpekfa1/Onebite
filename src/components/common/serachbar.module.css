@@ -8,14 +8,14 @@
   flex: 1;
   padding: 15px;
   border-radius: 5px;
-  border: 1px solid rgb(220, 220, 220);
+  border: 1px solid #ddd;
 }
 
 .container > button {
   width: 80px;
   border-radius: 5px;
   border: none;
-  background-color: rgb(37, 147, 255);
+  background: #7fbe6c;
   color: white;
   cursor: pointer;
 }
