@@ -1,4 +1,3 @@
-// app/components/modal.tsx
 "use client";
 
 import { ReactNode, useEffect, useRef } from "react";
@@ -12,22 +11,14 @@ const Modal = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal(); // 모달 오픈
+      dialogRef.current?.showModal();
       dialogRef.current?.scrollTo({
-        // 스크롤 위치 최상단
         top: 0,
       });
     }
   }, []);
 
-  //
-  /** createPortal
-   * layout component에 <div id='modal-root'/> 작성 (rendering될 위치)
-   * 1 번째 인수: Modal 컴포넌트의 렌더링 결과 (<dialog></dialog>)
-   * 2 번째 인수: rendering 될 위치인 DOM 요소 (<div id='modal-root'/>)
-   */
   return createPortal(
-    //
     <dialog
       onClose={() => router.back()} // ESC keyDown
       onClick={(e) => {
