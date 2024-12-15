@@ -1,5 +1,6 @@
-import { BookData } from "@/types";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import { BookData } from "@/types";
 import styles from "@/app/book/[id]/page.module.css";
 
 const BookDetail = async ({ bookId }: { bookId: string }) => {
@@ -21,7 +22,12 @@ const BookDetail = async ({ bookId }: { bookId: string }) => {
         className={styles.cover_img_container}
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
       >
-        <img src={coverImgUrl} />
+        <Image
+          src={coverImgUrl}
+          width={240}
+          height={300}
+          alt={`${title} cover image`}
+        />
       </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.subTitle}>{subTitle}</div>
