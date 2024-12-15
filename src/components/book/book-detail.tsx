@@ -27,6 +27,7 @@ const BookDetail = async ({ bookId }: { bookId: string }) => {
           width={240}
           height={300}
           alt={`${title} cover image`}
+          priority
         />
       </div>
       <div className={styles.title}>{title}</div>

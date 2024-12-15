@@ -7,7 +7,6 @@ export default function BookItem({
   id,
   title,
   subTitle,
-  // description,
   author,
   publisher,
   coverImgUrl,
@@ -19,6 +18,7 @@ export default function BookItem({
         width={80}
         height={105}
         alt={`${title} cover image`}
+        priority
       />
       <div>
         <div className={styles.title}>{title}</div>

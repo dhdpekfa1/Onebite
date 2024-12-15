@@ -1,9 +1,10 @@
 import { Suspense } from "react";
-import BookItem from "@/components/book-item/book-item";
-import style from "./page.module.css";
-import { BookData } from "@/types";
+import { Metadata } from "next";
 import { delay } from "@/util/delay";
+import BookItem from "@/components/book-item/book-item";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
+import { BookData } from "@/types";
+import style from "./page.module.css";
 
 const AllBooks = async () => {
   await delay(1500);
@@ -46,8 +47,17 @@ const RecoBooks = async () => {
   );
 };
 
-// Suspense 사용을 위해 강제로 동적 페이지로 변경
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "한입 북스",
+  description: "한입 북스에 저장된 도서를 만나보세요.",
+  openGraph: {
+    title: "한입 북스",
+    description: "한입 북스에 저장된 도서를 만나보세요.",
+    images: ["/thumbnail.png"],
+  },
+};
 
 export default function Home() {
   return (
