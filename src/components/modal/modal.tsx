@@ -18,18 +18,37 @@ const Modal = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === dialogRef.current) {
+      router.back();
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      router.back();
+    }
+  };
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog) {
+      dialog.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      if (dialog) {
+        dialog.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, [router]);
+
   return createPortal(
     <dialog
-      onClose={() => router.back()}
-      onClick={(e) => {
-        if (e.currentTarget.nodeName === "DIALOG") {
-          router.back();
-        }
-      }}
+      onClick={handleBackdropClick}
       ref={dialogRef}
       className={styles.modal}
     >
-      {children}
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </dialog>,
     document.getElementById("modal-root") as HTMLElement
   );

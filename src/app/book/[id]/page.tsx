@@ -13,7 +13,8 @@ export const generateMetadata = async ({
 }: {
   params: { id: string };
 }): Promise<Metadata> => {
-  const id = params.id;
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
@@ -37,7 +38,8 @@ export const generateMetadata = async ({
 };
 
 const BookPage = async ({ params }: { params: { id: string } }) => {
-  const id = params.id;
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
 
   return (
     <div className={styles.container}>
