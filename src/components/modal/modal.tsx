@@ -31,7 +31,7 @@ const Modal = ({ children }: { children: ReactNode }) => {
     >
       {children}
     </dialog>,
-    document.getElementById("modal-root") as HTMLElement //
+    document.getElementById("modal-root") as HTMLElement
   );
 };
 

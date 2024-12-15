@@ -2,10 +2,7 @@
 import { delay } from "@/util/delay";
 import { revalidateTag } from "next/cache";
 
-export const createReviewAction = async (
-  state: unknown,
-  formData: FormData
-) => {
+export const createReviewAction = async (_: unknown, formData: FormData) => {
   const bookId = formData.get("bookId")?.toString();
   const content = formData.get("content")?.toString();
   const author = formData.get("author")?.toString();

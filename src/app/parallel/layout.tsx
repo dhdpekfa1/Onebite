@@ -7,8 +7,8 @@ const Layout = ({
   feed,
 }: {
   children: ReactNode;
-  sidebar: ReactNode; // app/parallel/@sidebar/page.tsx
-  feed: ReactNode; // app/parallel/@feed/page.tsx
+  sidebar: ReactNode;
+  feed: ReactNode;
 }) => {
   return (
     <div>
@@ -17,7 +17,6 @@ const Layout = ({
         &nbsp;
         <Link href={"/parallel/new-feed"}>/parallel/new-feed</Link>
       </div>
-      {/* 기본 페이지 컴포넌트인 children과 함께 병렬로 렌더링 */}
       {sidebar}
       {feed}
       {children}

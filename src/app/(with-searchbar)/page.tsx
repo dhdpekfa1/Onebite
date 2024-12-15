@@ -31,7 +31,7 @@ const RecoBooks = async () => {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
-    { next: { revalidate: 3 } } // 3초마다 재검증
+    { next: { revalidate: 3 } }
   );
   if (!res.ok) {
     return <div>데이터를 불러오는 중 오류가 발생했습니다..</div>;
@@ -46,8 +46,6 @@ const RecoBooks = async () => {
     </div>
   );
 };
-
-// export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "한입 북스",

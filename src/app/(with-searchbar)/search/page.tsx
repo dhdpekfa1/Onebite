@@ -24,7 +24,6 @@ const SearchResult = async ({ q }: { q: string }) => {
   );
 };
 
-// 현재 페이지의 메타 데이터를 동적으로 생성
 export const generateMetadata = async ({
   searchParams,
 }: {

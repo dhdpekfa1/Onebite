@@ -10,7 +10,6 @@ const ReviewEditor = ({ bookId }: { bookId: string }) => {
     null
   );
 
-  // useActionState의 state 상태에 따라 re-render & 경고창
   useEffect(() => {
     if (state && !state.status) {
       alert(state.error);
@@ -19,9 +18,7 @@ const ReviewEditor = ({ bookId }: { bookId: string }) => {
 
   return (
     <section>
-      {/* server action을 위한 form에 server action 함수 전달 */}
       <form className={styles.form_container} action={formAction}>
-        {/* props으로 전달 받은 bookId를 value로 지정 & hidden & readOnly 속성 사용*/}
         <input name="bookId" value={bookId} hidden readOnly />
         <textarea
           required
