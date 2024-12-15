@@ -4,8 +4,17 @@ import { BookDetail, ReviewList } from "@/components/book";
 import { BookData } from "@/types";
 import styles from "./page.module.css";
 
-export const generateStaticParams = (): Array<{ id: string }> => {
-  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+export const generateStaticParams = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  const books: BookData[] = await res.json();
+
+  return books.map((book) => ({
+    id: book.id.toString(),
+  }));
 };
 
 export const generateMetadata = async ({

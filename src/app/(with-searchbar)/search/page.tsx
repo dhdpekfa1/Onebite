@@ -1,12 +1,10 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { delay } from "@/util/delay";
 import BookItem from "@/components/book-item/book-item";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { BookData } from "@/types";
 
 const SearchResult = async ({ q }: { q: string }) => {
-  await delay(1500);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`,
     { cache: "force-cache" }
