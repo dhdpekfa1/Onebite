@@ -1,10 +1,10 @@
 import BookPage from "@/app/book/[id]/page";
 import Modal from "@/components/modal/modal";
 
-const InterceptingBookPage = (props: any) => {
+const InterceptingBookPage = async ({ params }: { params: { id: string } }) => {
   return (
     <Modal>
-      <BookPage {...props} />
+      <BookPage params={params} />
     </Modal>
   );
 };

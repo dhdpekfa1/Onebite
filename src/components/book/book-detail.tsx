@@ -28,6 +28,7 @@ const BookDetail = async ({ bookId }: { bookId: string }) => {
           height={300}
           alt={`${title} cover image`}
           priority
+          style={{ width: "auto", height: "auto" }}
         />
       </div>
       <div className={styles.title}>{title}</div>

@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { ReviewEditor } from "@/components/review";
 import { BookDetail, ReviewList } from "@/components/book";
 import { BookData } from "@/types";
@@ -11,8 +12,8 @@ export const generateMetadata = async ({
   params,
 }: {
   params: { id: string };
-}) => {
-  const { id } = params;
+}): Promise<Metadata> => {
+  const id = params.id;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
@@ -36,7 +37,7 @@ export const generateMetadata = async ({
 };
 
 const BookPage = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+  const id = params.id;
 
   return (
     <div className={styles.container}>

@@ -19,6 +19,7 @@ export default function BookItem({
         height={105}
         alt={`${title} cover image`}
         priority
+        style={{ width: "auto", height: "auto" }}
       />
       <div>
         <div className={styles.title}>{title}</div>
