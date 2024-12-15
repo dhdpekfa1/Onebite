@@ -46,7 +46,7 @@ export const generateMetadata = async ({
   };
 };
 
-const BookPage = async ({ params }: { params: { id: string } }) => {
+const BookPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = await params;
   const id = resolvedParams.id;
 
