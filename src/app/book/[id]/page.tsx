@@ -3,19 +3,17 @@ import { BookDetail, ReviewList } from "@/components/book";
 import { BookData } from "@/types";
 import styles from "./page.module.css";
 
-// export const dynamicParams = false;
-
-export const generateStaticParams = () => {
+export const generateStaticParams = (): Array<{ id: string }> => {
   return [{ id: "1" }, { id: "2" }, { id: "3" }];
 };
 
 export const generateMetadata = async ({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) => {
-  const { id } = await params;
-  // 필요한 정보(data) 기반 작성 시 내부에서 API 호출 가능
+  const { id } = params;
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
   );
@@ -37,8 +35,9 @@ export const generateMetadata = async ({
   };
 };
 
-const BookPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const BookPage = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
   return (
     <div className={styles.container}>
       <BookDetail bookId={id} />

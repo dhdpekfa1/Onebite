@@ -20,10 +20,9 @@ const Modal = ({ children }: { children: ReactNode }) => {
 
   return createPortal(
     <dialog
-      onClose={() => router.back()} // ESC keyDown
+      onClose={() => router.back()}
       onClick={(e) => {
-        // 모달 바깥 영역 클릭 -> 뒤로가기
-        if (e.target.nodeName === "DIALOG") {
+        if (e.currentTarget.nodeName === "DIALOG") {
           router.back();
         }
       }}

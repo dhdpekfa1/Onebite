@@ -42,17 +42,15 @@ export const generateMetadata = async ({
   };
 };
 
-export default function SearchPage({
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
+  const { q } = await searchParams;
   return (
-    <Suspense
-      key={searchParams.q || ""}
-      fallback={<BookListSkeleton count={3} />}
-    >
-      <SearchResult q={searchParams.q || ""} />{" "}
+    <Suspense key={q || ""} fallback={<BookListSkeleton count={3} />}>
+      <SearchResult q={q || ""} />
     </Suspense>
   );
 }

@@ -2,8 +2,10 @@
 import { delay } from "@/util/delay";
 import { revalidateTag } from "next/cache";
 
-// 첫 번째 인수로 useActionState의 state가 전달 -> 사용하지 않을 때는 _: any 사용
-export const createReviewAction = async (state: any, formData: FormData) => {
+export const createReviewAction = async (
+  state: unknown,
+  formData: FormData
+) => {
   const bookId = formData.get("bookId")?.toString();
   const content = formData.get("content")?.toString();
   const author = formData.get("author")?.toString();
